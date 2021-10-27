@@ -37,12 +37,21 @@ Installfastboot() {
     sudo apt-get -qq update && sudo apt-get -qq --yes --allow-downgrades --allow-unauthenticated --allow-remove-essential install android-tools-fastboot
 }
 
+Installcurl() {
+    echo -e "$MESSAGE Attempting to install 'curl' command ....\n"
+    sudo apt-get -qq update && sudo apt-get -qq --yes --allow-downgrades --allow-unauthenticated --allow-remove-essential install curl
+}
+
+
 checkAndInstallShellCommands() {
     if ! command -v adb &> /dev/null; then
         InstallADB
     fi
     if ! command -v fastboot &> /dev/null; then
         Installfastboot
+    fi
+    if ! command -v curl &> /dev/null; then
+        Installcurl
     fi
 }
 
@@ -62,6 +71,13 @@ checkAndDownloadDependencies() {
         echo -e "$MESSAGE 'fastboot' command is not available"
     else
         echo -e "$MESSAGE 'fastboot' command is available"
+    fi
+
+    if ! command -v curl &> /dev/null; then
+        IS_SETUP_REQUIRED=true
+        echo -e "$MESSAGE 'curl' command is not available"
+    else
+        echo -e "$MESSAGE 'curl' command is available"
     fi
 
     if "$IS_SETUP_REQUIRED"; then
