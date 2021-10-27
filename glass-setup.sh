@@ -25,7 +25,7 @@ BRAINUPDATER_APK_FILE_PATH=$FILES_DIR_PATH/$BRAINUPDATER_APK_FILE_NAME
 
 XE24_SYSTEM_FILES_ZIP_DOWNLOAD_LINK=https://storage.googleapis.com/support-kms-prod/bTh25b2gcZx5f7apQdJU3lULYTTBoZDHqdsr
 XE24_ROOTED_BOOT_FILE_DOWNLOAD_LINK=https://storage.googleapis.com/glass_gfw/glass_1-img-5585826/boot.img
-BRAINUPDATER_APK_FILE_DOWNLOAD_LINK=https://ssl-empowered-brain.brainpower-api.com/api/brainupdater/package/com.brainpower.brainupdater/v/7.5?flavor=home&ts=5449670&sig=4svOHC7gXgSelwa54EzrwRu5D1EfkNoXcvtKRoGipnw%3D&deviceId=015ECD710C01D01C
+BRAINUPDATER_APK_FILE_DOWNLOAD_LINK="https://ssl-empowered-brain.brainpower-api.com/api/brainupdater/package/com.brainpower.brainupdater/v/7.5?flavor=home&ts=5451089&sig=mbdLwefixOzzU9G4jZY3pJPn2GvYMMeuYEDQlcnauLs%3D"
 
 InstallADB() {
     echo -e "$MESSAGE Attempting to install 'adb' command .... \n"
@@ -165,7 +165,7 @@ handleTryAgainMenuForBrainUpdater() {
             echo -e "$HINT Please enter an option between 1 and 3"
             handleTryAgainMenuForBrainUpdater
         elif [ $option -eq 1 ]; then 
-            handletBrainUpdaterMenu
+            handleBrainUpdaterMenu
         elif [ $option -eq 2 ]; then
             printAndHandleMainMenu
         elif [ $option -eq 3 ]; then
@@ -212,18 +212,21 @@ printAndHandleTryAgainMenuForEnableBrainUpdaterApp() {
 }
 
 checkAndDownloadXE24SystemImageForGlass() {
+    if ! test -d "$FILES_DIR_PATH"; then
+        mkdir $FILES_DIR_PATH
+    fi
     if test -f "$XE24_ZIP_FILE_PATH"; then
         if ! test -f "$SYSTEM_IMAGE_FILE_PATH"; then
-            unzip $XE24_ZIP_FILE_PATH
+            unzip $XE24_ZIP_FILE_PATH -d $FILES_DIR_PATH
         fi
     else
-        echo -e "$ERROR Missing XE24 system image file"
-        echo -e "$MESSAGE The script needs to download XE24 system image to continue"
+        echo -e "$ERROR Missing XE24 system image zip file"
+        echo -e "$MESSAGE The script needs to download XE24 system image zip to continue"
         read -p "Press [ENTER] to start download: "
         echo -e "$MESSAGE Downloading XE24 system image for Glass"
         curl $XE24_SYSTEM_FILES_ZIP_DOWNLOAD_LINK --output $XE24_ZIP_FILE_PATH
         echo -e "$MESSAGE Unzipping the XE24 system image download"
-        unzip $XE24_ZIP_FILE_PATH
+        unzip $XE24_ZIP_FILE_PATH -d $FILES_DIR_PATH
         echo -e "$MESSAGE Completed the download and extraction of XE24 system image for Glass"
     fi
 }
@@ -245,15 +248,12 @@ checkAndDownloadBrainUpdaterAPKFileForGlass() {
         echo -e "$MESSAGE The script needs to download the BrainUpdater APK file to continue"
         read -p "Press [ENTER] to start download: "
         echo -e "$MESSAGE Downloading the BrainUpdater APK file"
-        curl "$BRAINUPDATER_APK_FILE_DOWNLOAD_LINK" --output $BRAINUPDATER_APK_FILE_PATH
+        curl $BRAINUPDATER_APK_FILE_DOWNLOAD_LINK --output $BRAINUPDATER_APK_FILE_PATH
         echo -e "$MESSAGE Completed download of the BrainUpdater APK file"
     fi
 }
 
 handleFastbootMenu() {
-    checkAndDownloadXE24SystemImageForGlass
-    checkAndDownloadXE24RootedBootImageForGlass
-
     INDEX=0
     for device in `fastboot devices | grep fastboot | awk '{print $1}'`; do
         if [ $INDEX -eq 0 ]; then
@@ -294,6 +294,8 @@ handleFastbootMenu() {
 printAndHandleFastbootMenu() {
     clear
     printFastbootMenuHeader
+    checkAndDownloadXE24SystemImageForGlass
+    checkAndDownloadXE24RootedBootImageForGlass
     handleFastbootMenu
 }
 
