@@ -16,12 +16,12 @@ SYSTEM_IMAGE_FILE_NAME=system.img
 RECOVERY_IMAGE_FILE_NAME=recovery.img
 BRAINUPDATER_APK_FILE_NAME=brainupdater-v7.5.apk
 
-FILES_DIR_PATH=./files
-XE24_ZIP_FILE_PATH=$FILES_DIR_PATH/$XE24_ZIP_FILE_NAME
-ROOTED_BOOT_IMAGE_FILE_PATH=$FILES_DIR_PATH/$ROOTED_BOOT_IMAGE_FILE_NAME
-SYSTEM_IMAGE_FILE_PATH=$FILES_DIR_PATH/$SYSTEM_IMAGE_FILE_NAME
-RECOVERY_IMAGE_FILE_PATH=$FILES_DIR_PATH/$RECOVERY_IMAGE_FILE_NAME
-BRAINUPDATER_APK_FILE_PATH=$FILES_DIR_PATH/$BRAINUPDATER_APK_FILE_NAME
+FILES_DIR_PATH=files
+XE24_ZIP_FILE_PATH="$FILES_DIR_PATH/$XE24_ZIP_FILE_NAME"
+ROOTED_BOOT_IMAGE_FILE_PATH="$FILES_DIR_PATH/$ROOTED_BOOT_IMAGE_FILE_NAME"
+SYSTEM_IMAGE_FILE_PATH="$FILES_DIR_PATH/$SYSTEM_IMAGE_FILE_NAME"
+RECOVERY_IMAGE_FILE_PATH="$FILES_DIR_PATH/$RECOVERY_IMAGE_FILE_NAME"
+BRAINUPDATER_APK_FILE_PATH="$FILES_DIR_PATH/$BRAINUPDATER_APK_FILE_NAME"
 
 XE24_SYSTEM_FILES_ZIP_DOWNLOAD_LINK=https://storage.googleapis.com/support-kms-prod/bTh25b2gcZx5f7apQdJU3lULYTTBoZDHqdsr
 XE24_ROOTED_BOOT_FILE_DOWNLOAD_LINK=https://storage.googleapis.com/glass_gfw/glass_1-img-5585826/boot.img
@@ -208,7 +208,7 @@ handleTryAgainMenuForEnableBrainUpdaterApp() {
             echo -e "$HINT Please enter an option between 1 and 3"
             handleTryAgainMenuForEnableBrainUpdaterApp
         elif [ $option -eq 1 ]; then 
-            hanldeEnableBrainUpdaterApp
+            handleEnableBrainUpdaterApp
         elif [ $option -eq 2 ]; then
             printAndHandleMainMenu
         elif [ $option -eq 3 ]; then
@@ -294,9 +294,9 @@ handleFastbootMenu() {
             sudo fastboot -s $device oem unlock
             echo "$MESSAGE Device[$INDEX] $device unlocked at `date +%Y-%m-%d_%H:%M:%S`" 2>&1 | tee -a setup_device.log
 
-            sudo fastboot -s $device flash boot $FILES_DIR_PATH/$ROOTED_BOOT_IMAGE_FILE
-            sudo fastboot -s $device flash recovery $FILES_DIR_PATH/$RECOVERY_IMAGE_FILE
-            sudo fastboot -s $device flash system $FILES_DIR_PATH/$SYSTEM_IMAGE_FILE 
+            sudo fastboot -s $device flash boot $ROOTED_BOOT_IMAGE_FILE_PATH
+            sudo fastboot -s $device flash recovery $RECOVERY_IMAGE_FILE_PATH
+            sudo fastboot -s $device flash system $SYSTEM_IMAGE_FILE_PATH
             echo "$MESSAGE Device[$INDEX] $device all partitions flashed at `date +%Y-%m-%d_%H:%M:%S`" 2>&1 | tee -a setup_device.log
 
             sudo fastboot -s $device reboot 
@@ -347,10 +347,10 @@ handleBrainUpdaterMenu() {
             echo "$MESSAGE Started installing BrainUpdater on device[$INDEX] $device $3"
 
             echo "*** Pushing APK file to device[$2] $device ***" 2>&1
-            adb -s $device push $BRAINUPDATER_APK_FILE /data/local/tmp
+            adb -s $device push $BRAINUPDATER_APK_FILE_PATH /data/local/tmp
             adb -s $device shell mount -o remount,rw /system
             adb -s $device shell "ls -d /system/priv-app/* | grep "brainupdater" | xargs rm -f"
-            adb -s $device shell cp /data/local/tmp/$BRAINUPDATER_APK_NAME /system/priv-app
+            adb -s $device shell cp /data/local/tmp/$BRAINUPDATER_APK_FILE_NAME /system/priv-app
             adb -s $device reboot
             echo -e "$MESSAGE Installation of BrainUpdater APK -> $BRAINUPDATER_APK_NAME on Device $device is successful"
         done
@@ -460,7 +460,7 @@ handleTryAgainMenuForBPAppsInstalled() {
             echo -e "$HINT Please enter an option between 1 and 3"
             handleTryAgainMenuForEnableBrainUpdaterApp
         elif [ $option -eq 1 ]; then 
-            hanldeEnableBrainUpdaterApp
+            handleEnableBrainUpdaterApp
         elif [ $option -eq 2 ]; then
             printAndHandleMainMenu
         elif [ $option -eq 3 ]; then
