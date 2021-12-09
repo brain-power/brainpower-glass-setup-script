@@ -259,7 +259,10 @@ checkAndDownloadXE24RootedBootImageForGlass() {
 }
 
 checkAndDownloadBrainUpdaterAPKFileForGlass() {
-   if ! test -f "$BRAINUPDATER_APK_FILE_PATH"; then
+    if ! test -d "$FILES_DIR_PATH"; then
+        mkdir $FILES_DIR_PATH
+    fi
+    if ! test -f "$BRAINUPDATER_APK_FILE_PATH"; then
         echo -e "$ERROR Missing the BrainUpdater APK file"
         echo -e "$MESSAGE The script needs to download the BrainUpdater APK file to continue"
         read -p "Press [ENTER] to start download: "
