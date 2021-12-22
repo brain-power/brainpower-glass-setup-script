@@ -14,7 +14,7 @@ XE24_ZIP_FILE_NAME=xe24.zip
 ROOTED_BOOT_IMAGE_FILE_NAME=rooted_boot.img
 SYSTEM_IMAGE_FILE_NAME=system.img
 RECOVERY_IMAGE_FILE_NAME=recovery.img
-BRAINUPDATER_APK_FILE_NAME=brainupdater-v7.5.apk
+BRAINUPDATER_APK_FILE_NAME=brainupdater-v7.6.apk
 
 FILES_DIR_PATH=files
 XE24_ZIP_FILE_PATH="$FILES_DIR_PATH/$XE24_ZIP_FILE_NAME"
@@ -25,7 +25,7 @@ BRAINUPDATER_APK_FILE_PATH="$FILES_DIR_PATH/$BRAINUPDATER_APK_FILE_NAME"
 
 XE24_SYSTEM_FILES_ZIP_DOWNLOAD_LINK=https://storage.googleapis.com/support-kms-prod/bTh25b2gcZx5f7apQdJU3lULYTTBoZDHqdsr
 XE24_ROOTED_BOOT_FILE_DOWNLOAD_LINK=https://storage.googleapis.com/glass_gfw/glass_1-img-5585826/boot.img
-BRAINUPDATER_APK_FILE_DOWNLOAD_LINK="https://ssl-empowered-brain.brainpower-api.com/api/brainupdater/package/com.brainpower.brainupdater/v/7.5?flavor=home&ts=5463585&sig=b3Pgmi2rrkw%2FG7uqXX0PPSM%2FvR7U9%2BEo9%2B7IPy4pEXk%3D&deviceId=015ECD710C01D01C"
+BRAINUPDATER_APK_FILE_DOWNLOAD_LINK="https://ssl-empowered-brain.brainpower-api.com/api/brainupdater/package/com.brainpower.brainupdater/v/7.6?flavor=home&ts=5467242&sig=XNWpBU0vmb87K89ZVjLMrmNqX85PQqm%2FgXGhvUwxQFc%3D&deviceId=015ECD710C01D01C"
 
 InstallADB() {
     echo -e "$MESSAGE Attempting to install 'adb' command .... \n"
