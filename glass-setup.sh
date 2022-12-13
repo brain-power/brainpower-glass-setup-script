@@ -488,7 +488,8 @@ printMenuOptions() {
     echo "2) Install the latest version of the BrainUpdater app"
     echo "3) Enable the BrainUpdater app"
     echo "4) Print installed brainpower apps on connected android devices"
-    echo "5) Exit"
+    echo "5) Setup wifi connection on Glass devices"
+    echo "6) Exit"
     echo -e "$HORIZONTALLINE\n"
 }
 
@@ -517,6 +518,9 @@ handleMainMenuInteraction() {
         elif [ $option -eq 5 ]; then
             echo -e "\n$MESSAGE Adios!\n"
             exit
+        elif [ $option -eq 6 ]; then
+            echo -e "\n$MESSAGE Adios!\n"
+            exit
         fi
     else
         echo -e "$ERROR The provided selection is not a number"
@@ -533,6 +537,3 @@ printAndHandleMainMenu() {
 printHeader
 checkAndDownloadDependencies
 printAndHandleMainMenu
-
-
-
