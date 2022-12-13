@@ -1,6 +1,6 @@
 # brainpower-glass-setup-script
 
-The glass-setup script helps users to quickly setup the Empowered Brain software suite on any number of Glass devices connected to the computer.
+The glass-setup script in this repo helps users to quickly setup the Empowered Brain software suite on any number of Glass devices connected to the computer.
 
 To execute the script, run the following command in a macOS Terminal or Linux shell prompt.
 
