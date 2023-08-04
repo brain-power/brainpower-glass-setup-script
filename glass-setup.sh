@@ -25,7 +25,7 @@ BRAINUPDATER_APK_FILE_PATH="$FILES_DIR_PATH/$BRAINUPDATER_APK_FILE_NAME"
 
 XE24_SYSTEM_FILES_ZIP_DOWNLOAD_LINK=https://storage.googleapis.com/support-kms-prod/bTh25b2gcZx5f7apQdJU3lULYTTBoZDHqdsr
 XE24_ROOTED_BOOT_FILE_DOWNLOAD_LINK=https://storage.googleapis.com/glass_gfw/glass_1-img-5585826/boot.img
-BRAINUPDATER_APK_FILE_DOWNLOAD_LINK="https://ssl-empowered-brain.brainpower-api.com/api/brainupdater/package/com.brainpower.brainupdater/v/7.6?flavor=home&ts=5467242&sig=XNWpBU0vmb87K89ZVjLMrmNqX85PQqm%2FgXGhvUwxQFc%3D&deviceId=015ECD710C01D01C"
+BRAINUPDATER_APK_FILE_DOWNLOAD_LINK="https://api.empoweredbrain.com/api/brainupdater/package/com.brainpower.brainupdater/v/7.6?flavor=home&ts=5637213&sig=xDDt%2Bv4iJgkWqFx0EmDP%2FrUs1CDylXRFb5PD2rmZAjo%3D"
 
 InstallADB() {
     echo -e "$MESSAGE Attempting to install 'adb' command .... \n"
